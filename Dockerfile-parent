@@ -1,0 +1,74 @@
+FROM python:3.11-alpine3.18
+
+# Build-time flags
+#ARG WITH_PLUGINS=true
+
+# Environment variables
+#ENV PACKAGES=/usr/local/lib/python3.11/site-packages
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Set build directory
+WORKDIR /tmp
+
+# Copy files necessary for build
+COPY *requirements.txt ./user-requirements.txt
+#COPY pyproject.toml pyproject.toml
+#COPY mkdocs.yml /docs/mkdocs.yml
+
+# Perform build and cleanup artifacts and caches
+RUN apk upgrade --update-cache -a
+RUN apk add --no-cache \
+    cairo \
+    freetype-dev \
+    git \
+    git-fast-import \
+    jpeg-dev \
+    openssh \
+    zlib-dev
+RUN apk add --no-cache --virtual .build \
+    gcc \
+    libffi-dev \
+    musl-dev
+RUN pip install --no-cache-dir --upgrade pip
+#RUN pip install --no-cache-dir .
+#  pip install --no-cache-dir . \
+#&& \
+
+RUN pip install --no-cache-dir \
+      mkdocs-material[recommended] \
+      mkdocs-material[imaging]
+
+RUN pip install -U -r user-requirements.txt
+
+#&& \
+#  if [ "${WITH_PLUGINS}" = "true" ]; then \
+#    pip install --no-cache-dir \
+#      mkdocs-material[recommended] \
+#      mkdocs-material[imaging]; \
+#  fi \
+#&& \
+#  if [ -e user-requirements.txt ]; then \
+#    pip install -U -r user-requirements.txt; \
+#  fi
+#  fi \
+#&& \
+#  apk del .build
+#  apk del .build \
+#&& \
+#  for theme in mkdocs readthedocs; do \
+#    rm -rf ${PACKAGES}/mkdocs/themes/$theme; \
+#    ln -s \
+#      ${PACKAGES}/material/templates \
+#      ${PACKAGES}/mkdocs/themes/$theme; \
+#  done \
+#&& \
+#  rm -rf /tmp/* /root/.cache \
+#&& \
+#  find ${PACKAGES} \
+#    -type f \
+#    -path "*/__pycache__/*" \
+#    -exec rm -f {} \; \
+#&& \
+#  git config --system --add safe.directory /docs \
+#&& \
+#  git config --system --add safe.directory /site

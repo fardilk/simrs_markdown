@@ -1,0 +1,27 @@
+{#-
+  This file was automatically generated - do not edit
+-#}
+{% extends "base.html" %}
+{% block extrahead %}
+  <link rel="stylesheet" href="{{ 'assets/stylesheets/custom.00c04c01.min.css' | url }}">
+{% endblock %}
+{% block announce %}
+  Follow <strong>@SISMEDIKA</strong> on
+  <a rel="me" href="https://www.instagram.com/sismedika/">
+    <span class="twemoji instagram">
+      {% include ".icons/fontawesome/brands/instagram.svg" %}
+    </span>
+    <strong>Instagram</strong>
+  </a>
+  and
+  <a href="https://www.linkedin.com/company/pt-sistem-integrasi-medika-sismedika">
+    <span class="twemoji linkedin">
+      {% include ".icons/fontawesome/brands/linkedin.svg" %}
+    </span>
+    <strong>LinkedIn</strong>
+  </a>
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ 'assets/javascripts/custom.2340dcd7.min.js' | url }}"></script>
+{% endblock %}

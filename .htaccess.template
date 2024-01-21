@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Only accessible for authorized SISMEDIKA Team"
+AuthUserFile /mnt/c/Users/mfard/devel/ardihikaru/my-mkdocs/.htpasswd
+require valid-user

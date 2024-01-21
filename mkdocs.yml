@@ -1,0 +1,398 @@
+# Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
+
+# Project information
+site_name: SISMEDIKA
+#site_url: https://sismedika.github.io/docs/
+site_url: https://sismedika.github.io/
+site_author: SISMEDIKA TEAM
+site_description: >-
+  An integrated product documentation owner by SISMEDIKA
+
+# Repository
+repo_name: sismedika/docs
+repo_url: https://sismedika.github.io/docs/
+
+# Copyright
+copyright: Copyright &copy; 2023 SISMEDIKA TEAM
+
+# Configuration
+theme:
+  name: material
+  custom_dir: material/overrides
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.code.select
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+  icon:
+    logo: logo
+
+# Plugins
+plugins:
+  - blog
+#  - macros
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
+#  - open-in-new-tab  # bikin gak bisa download file
+
+# Hooks
+hooks:
+  - material/overrides/hooks/shortcodes.py
+  - material/overrides/hooks/translations.py
+
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+
+# Additional configuration
+extra:
+  status:
+    new: Recently added
+    deprecated: Deprecated
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/sismedika
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/r/sismedika/docs/
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/sismedika/
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/pt-sistem-integrasi-medika-sismedika
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  # ref: https://stackoverflow.com/questions/69237778/how-to-embed-a-local-pdf-file-in-mkdocs-generated-website-on-github-pages
+#  - pymdownx.pathconverter:  # requires `macros` plugin
+#      base_path: '' # default: ''
+#      relative_path: '' # default ''
+#      absolute: true # default: false
+#      tags: 'a script img link object embed'
+
+# Page tree
+nav:
+  - Home: index.md
+  - Product Development:
+    - product-development/index.md
+    - HIS.v2:
+      - product-development/his/v2/index.md
+    - HIS.v3:
+      - product-development/his/v3/index.md
+      - Important Links: product-development/his/v3/important-link.md
+      - PRD:
+        - Executive Summary: product-development/his/v3/prd/1-patient-care-information-system/executive-summary.md
+        - Patient Care Information System:
+          - Patient Care Information System: product-development/his/v3/prd/1-patient-care-information-system/executive-summary.md
+          - Patient Management: product-development/his/v3/prd/1-patient-care-information-system/patient-management.md
+          - PRD Patient Registration: product-development/his/v3/prd/1-patient-care-information-system/prd-patient-registration.md
+      - Working Package (WP):
+        - WP 1:
+          - WP1 Executive Summary: product-development/his/v3/working-package/wp1/executive-summary.md
+          - WP1.1 Initial System Design: product-development/his/v3/working-package/wp1/wp11.md
+          - WP1.2 System Requirements and Specifications: product-development/his/v3/working-package/wp1/wp12.md
+          - WP1.3 Scenario and Use Cases:
+            # - product-development/his/v3/working-package/wp1/wp13.md
+            - Patient Care Information System:
+              - About Patient Care Information System: product-development/his/v3/working-package/wp1/wp13/patient-care-information-system/executive-summary.md
+              - SC.1 Patient Management: product-development/his/v3/working-package/wp1/wp13/patient-care-information-system/sc-1-patient-management.md
+              - SC.2 Appointment and Scheduling: product-development/his/v3/working-package/wp1/wp13/patient-care-information-system/sc-2-appointment-and-scheduling.md
+              - SC.3 Patient Encounter: product-development/his/v3/working-package/wp1/wp13/patient-care-information-system/sc-3-patient-encounter.md
+              - SC.4 Electronic Healthcare: product-development/his/v3/working-package/wp1/wp13/patient-care-information-system/sc-4-electronic-healthcare.md
+          # - Patient Management: product-development/his/v3/working-package/wp1/wp13/Patient-Care-Information-System.md
+            - Clinical Support System:
+              - About Clinical Support System: product-development/his/v3/working-package/wp1/wp13/clinical-support-system/executive-summary.md
+              - SC.5 Pharmacy Information System: product-development/his/v3/working-package/wp1/wp13/clinical-support-system/sc-5-pharmacy-information-system.md
+              - SC.6 Laboratory Information System (LIS) Module: product-development/his/v3/working-package/wp1/wp13/clinical-support-system/sc-6-laboratory-information-system.md
+              - SC.7 Radiology Information System (RIS) Module: product-development/his/v3/working-package/wp1/wp13/clinical-support-system/sc-7-radiologi-information-system.md
+              - SC.8 Blood Bank Module: product-development/his/v3/working-package/wp1/wp13/clinical-support-system/sc-8-blood-bank-module.md
+              - SC.9 Operation Theatre (OT) Management Module: product-development/his/v3/working-package/wp1/wp13/clinical-support-system/sc-9-operation-theatre.md
+              - SC.10 Food and Beverage Information System Module: product-development/his/v3/working-package/wp1/wp13/clinical-support-system/sc-10-food-and-beverage.md
+              - SC.11 Inventory and Supplies Module (Barang Medis Habis Pakai): product-development/his/v3/working-package/wp1/wp13/clinical-support-system/sc-11-inventory-and-supplies.md
+            - Management Information System:
+              - About Management Information System: product-development/his/v3/working-package/wp1/wp13/management-information-system/executive-summary.md
+              - SC.12 Billing and Finance Module: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-12-billing-and-finance.md
+              - SC.13 Accounting Information System: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-13-accounting-information-system.md
+              - SC.14 Human Resources Module (Doctors): product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-14-human-resources.md
+              - SC.15 Analytics and Reporting Module: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-15-analytics-and-reporting.md
+              - SC.16 Interoperability Modules: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-16-interoperability.md
+              - SC.17 User Management: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-17-user-management.md
+              - SC.18 Supporting Feature: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-18-supporting.md
+              - SC.19 Product and Pricelist Management: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-19-product-and-pricelist.md
+              - SC.20 Bed Management: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-20-bed-management.md
+              - SC.21 Ambulance Management Module: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-21-ambulance-management-module.md
+              - SC.22 Master: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-22-master.md
+              - SC.23 CRM (Customer Relationship Management): product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-23-crm.md
+              - SC.24 Customer Service Module: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-24-customer-service.md
+              - SC.25 Laundry Management Module: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-25-laundry-management.md
+              - SC.26 Hospital Quality Management Module: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-26-hospital-quality-management.md
+              - SC.27 Legal Module: product-development/his/v3/working-package/wp1/wp13/management-information-system/sc-27-legal.md
+        - WP 2:
+          - WP2 Executive Summary: product-development/his/v3/working-package/wp2/executive-summary.md
+          - WP2.1 Technical architecture: product-development/his/v3/working-package/wp2/wp21.md
+          - WP2.2 Data Governance: product-development/his/v3/working-package/wp2/wp22.md
+          - WP2.3 Infrastructure specifications: product-development/his/v3/working-package/wp2/wp23.md
+        - WP 3:
+          - WP3 Executive Summary: product-development/his/v3/working-package/wp3/executive-summary.md
+          - WP3.1 System Configuration: product-development/his/v3/working-package/wp3/wp31.md
+          - WP3.2 Backup and Rollover Strategy: product-development/his/v3/working-package/wp3/wp32.md
+          - WP3.3 System Orchestration: product-development/his/v3/working-package/wp3/wp33.md
+        - WP 4:
+          - WP4 Executive Summary: product-development/his/v3/working-package/wp4/executive-summary.md
+          - WP4.1 Testbed: product-development/his/v3/working-package/wp4/wp41.md
+          - WP4.2 System Integration: product-development/his/v3/working-package/wp4/wp42.md
+        - WP 5:
+          - WP5 Executive Summary: product-development/his/v3/working-package/wp5/executive-summary.md
+          - WP5.1 Implementation Strategy: product-development/his/v3/working-package/wp5/wp51.md
+          - WP5.2 Socialisation and tech-support Strategy: product-development/his/v3/working-package/wp5/wp52.md
+      - Installation: getting-started.md
+  - Work breakdown structure:
+    - work-breakdown-structure/index.md
+    - HIS.v2:
+      - 2023:
+        - 28 December: work-breakdown-structure/his/v2/2023/2023-12-28.md
+      - 2024:
+        - 01 January: work-breakdown-structure/his/v2/2024/2024-01-01.md
+    - HIS.v3:
+      - 2023:
+        - 28 December: work-breakdown-structure/his/v3/2023/2023-12-28.md
+      - 2024:
+        - 01 January: work-breakdown-structure/his/v3/2024/2024-01-01.md
+  - Documentation:
+    - documentation/index.md
+    - WireGuard:
+      - Installation: documentation/wire-guard.md
+    - GitLab:
+      - documentation/gitlab/index.md
+      - Installation:
+        - Native Version: documentation/gitlab/install-self-hosted/native/native.md
+        - Docker Version: documentation/gitlab/install-self-hosted/docker/docker.md
+        - Default Password: documentation/gitlab/install-self-hosted/default-password.md
+        - SMTP Configuration: documentation/gitlab/install-self-hosted/smtp-configuration.md
+      - GitLab Runner:
+        - Installation: documentation/gitlab/gitlab-runner/install.md
+        - Configuration: documentation/gitlab/gitlab-runner/configuration.md
+    - Markdown:
+      - Common: documentation/markdown-cheat-sheet.md
+      - Footnote: documentation/footnote.md
+      - Twitter Widget: documentation/twitter-widget.md
+      - Tag Links: documentation/tag-links.md
+      - Button and Logo: documentation/button-and-logo.md
+      - Development Checklist: documentation/development-checklist.md
+    - Reference:
+        - documentation/reference/index.md
+        - documentations:
+          - Admonitions: documentation/reference/admonitions.md
+          - Annotations: documentation/reference/annotations.md
+          - Buttons: documentation/reference/buttons.md
+          - Code blocks: documentation/reference/code-blocks.md
+          - Content tabs: documentation/reference/content-tabs.md
+          - Data tables: documentation/reference/data-tables.md
+          - Diagrams: documentation/reference/diagrams.md
+          - Footnotes: documentation/reference/footnotes.md
+          - Formatting: documentation/reference/formatting.md
+          - Grids: documentation/reference/grids.md
+          - Icons, Emojis: documentation/reference/icons-emojis.md
+          - Images: documentation/reference/images.md
+          - Lists: documentation/reference/lists.md
+          - Math: documentation/reference/math.md
+          - Tooltips: documentation/reference/tooltips.md
+    - Plugins:
+        - documentation/plugins/index.md
+        - documentations:
+          - Macro Plugin: documentation/plugins/macro-info.md
+          - Blog: documentation/plugins/blog.md
+          - Group: documentation/plugins/group.md
+          - Info: documentation/plugins/info.md
+          - Meta: documentation/plugins/meta.md
+          - Offline: documentation/plugins/offline.md
+          - Optimize: documentation/plugins/optimize.md
+          - Privacy: documentation/plugins/privacy.md
+          - Projects: documentation/plugins/projects.md
+          - Search: documentation/plugins/search.md
+          - Social: documentation/plugins/social.md
+          - Tags: documentation/plugins/tags.md
+          - Typeset: documentation/plugins/typeset.md
+        - Requirements:
+            - Image processing: documentation/plugins/requirements/image-processing.md
+            - Caching: documentation/plugins/requirements/caching.md
+    - WebPage Setup:
+      - documentation/setup/index.md
+      - documentations:
+        - Changing the colors: documentation/setup/changing-the-colors.md
+        - Changing the fonts: documentation/setup/changing-the-fonts.md
+        - Changing the language: documentation/setup/changing-the-language.md
+        - Changing the logo and icons: documentation/setup/changing-the-logo-and-icons.md
+        - Ensuring data privacy: documentation/setup/ensuring-data-privacy.md
+        - Setting up navigation: documentation/setup/setting-up-navigation.md
+        - Setting up site search: documentation/setup/setting-up-site-search.md
+        - Setting up site analytics: documentation/setup/setting-up-site-analytics.md
+        - Setting up social cards: documentation/setup/setting-up-social-cards.md
+        - Setting up a blog: documentation/setup/setting-up-a-blog.md
+        - Setting up tags: documentation/setup/setting-up-tags.md
+        - Setting up versioning: documentation/setup/setting-up-versioning.md
+        - Setting up the header: documentation/setup/setting-up-the-header.md
+        - Setting up the footer: documentation/setup/setting-up-the-footer.md
+        - Adding a git repository: documentation/setup/adding-a-git-repository.md
+        - Adding a comment system: documentation/setup/adding-a-comment-system.md
+        - Building an optimized site: documentation/setup/building-an-optimized-site.md
+        - Building for offline usage: documentation/setup/building-for-offline-usage.md
+      - Extensions:
+        - documentation/setup/extensions/index.md
+        - Python Markdown: documentation/setup/extensions/python-markdown.md
+        - Python Markdown Extensions: documentation/setup/extensions/python-markdown-extensions.md
+  - Article:
+    - blog/index.md
+  - Miscellaneous:
+    - Changelog:
+      - changelog/index.md
+      - How to upgrade: upgrade.md
+    - Browser support: browser-support.md
+    - Philosophy: philosophy.md
+    - Alternatives: alternatives.md
+    - License: license.md
+    - Conventions: conventions.md
+    - Customization: customization.md
+    - Guides:
+      - Creating a reproduction: guides/creating-a-reproduction.md
+    - Contributing:
+      - contributing/index.md
+      - Reporting a bug: contributing/reporting-a-bug.md
+      - Reporting a docs issue: contributing/reporting-a-docs-issue.md
+      - Requesting a change: contributing/requesting-a-change.md
+      - Adding translations: contributing/adding-translations.md
+      - Making a pull request: contributing/making-a-pull-request.md
+      - Asking a question: https://github.com/squidfunk/mkdocs-material/discussions
+    - Insiders:
+      - insiders/index.md
+      - Getting started: insiders/getting-started.md
+      - FAQ: insiders/faq/sponsoring.md
+      - Changelog:
+        - insiders/changelog/index.md
+        - How to upgrade: insiders/upgrade.md
+      - Community Experts Program:
+        - insiders/community-experts-program/index.md
+
+#  - Getting started:
+#    - Installation: getting-started.md
+#    - Creating your site: creating-your-site.md
+#    - Publishing your site: publishing-your-site.md
+#    - Enterprise feedback: enterprise-support.md
